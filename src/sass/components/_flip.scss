@@ -1,0 +1,78 @@
+.flip
+{
+  height: 200px;
+  width: 200px;
+
+  perspective: 800px;
+  position: relative;
+}
+.flip-content
+{
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+    left: 0;
+    top: 0;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+.flip-face
+{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  backface-visibility: hidden;
+  position: absolute;
+    left: 0;
+    top: 0;
+
+  &:first-child
+  {
+    background: pink;
+  }
+  &:last-child
+  {
+    background: green;
+    transform: rotateY(180deg);
+  }
+}
+.flip-face-letter
+{
+  color: #FFFFFF;
+  font-size: 4rem;
+}
+.flip:hover, .flip.is-flipped
+{
+  .flip-content
+  {
+    transform: rotateY(180deg);
+  }
+}
+
+/*
+ * Preserve 3D not supported
+ */
+html.no-preserve3d
+{
+  .flip-face:last-child
+  {
+    opacity: 0;
+    transform: rotateY(0deg);
+    transition: opacity 1s ease;
+  }
+  .flip:hover, .flip.is-flipped
+  {
+    .flip-content
+    {
+      transform: none;
+    }
+    .flip-face:last-child
+    {
+      opacity: 1;
+    }
+  }
+}
